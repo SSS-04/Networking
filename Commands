@@ -1,0 +1,46 @@
+ROUTER CONFIGURATION
+>enable
+#configure terminal
+#interface gig0/0/0
+#ip address 192.168.10.1 255.255.255.248
+#no shutdown
+#exit
+
+SWITCH CONFIGURATION
+>enable
+#configure terminal
+#interface vlan1
+#ip address 192.168.10.2 255.255.255.248
+#no shutdown
+#exit
+#ip default-gateway 192.168.10.1
+ 
+DHCP CONFIGURATION
+#ip dhcp pool RP-31-DHCP
+#network 192.168.16.0 255.255.255.240
+#default-router 192.168.16.1
+#dns-server 8.8.8.8
+#exit
+#ip dhcp excluded-address 192.168.16.1 192.168.16.4
+ 
+BASIC COMMANDS
+RP-32(config)#hostname RP-32
+RP-32#clock set 10:15:30 26 oct 2024
+RP-32#show clock
+RP-32(config)#enable password cisco
+RP-32(config)#enable secret ccna
+RP-32(config)#line console 0
+RP-32(config-line)#password cisco
+RP-32(config-line)#login
+RP-32(config-line)#exit
+RP-32(config)#service password-encryption
+RP-32(config)#interface gig0/0/0
+RP-32(config-if)#description connected to RP32-SWITCH
+RP-32(config-if)#exit
+RP-32(config)#banner motd #DICLAIMER - UNKNOWN ACCESS#
+RP-32(config)#no ip domain-lookup
+
+MEMORIES OF CISCO DEVICES
+RP-32#show running-config
+RP-32#copy running-config startup-config
+RP-32#show startup-config
